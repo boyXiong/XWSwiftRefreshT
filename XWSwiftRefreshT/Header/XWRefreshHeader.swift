@@ -4,12 +4,13 @@
 //
 //  Created by Xiong Wei on 15/9/8.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
 
 import UIKit
 
-
-class XWRefreshHeader: XWRefreshComponent {
+/** 抽象类不直接使用 用于重写*/
+public class XWRefreshHeader: XWRefreshComponent {
     
     //MARK: 公开的
     
@@ -17,10 +18,10 @@ class XWRefreshHeader: XWRefreshComponent {
     var lastUpdatedateKey:String = ""
     
     /** 忽略多少scrollView的contentInset的top */
-    var ignoredScrollViewContentInsetTop:CGFloat = 0.0
+    public var ignoredScrollViewContentInsetTop:CGFloat = 0.0
     
     /** 上一次下拉刷新成功的时间 */
-    var lastUpdatedTime:NSDate{
+    public var lastUpdatedTime:NSDate{
         get{
             if let realTmp =  NSUserDefaults.standardUserDefaults().objectForKey(self.lastUpdatedateKey){
                 
@@ -156,8 +157,8 @@ class XWRefreshHeader: XWRefreshComponent {
         }
     }
     
-       
-    override func endRefreshing() {
+    /** 结束刷新 */
+    override public func endRefreshing() {
         
         if self.scrollView.isKindOfClass(UICollectionView){
             
@@ -176,7 +177,7 @@ class XWRefreshHeader: XWRefreshComponent {
         super.init(frame: frame)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

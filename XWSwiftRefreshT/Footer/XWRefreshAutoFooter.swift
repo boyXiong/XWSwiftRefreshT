@@ -4,15 +4,18 @@
 //
 //  Created by Xiong Wei on 15/10/6.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
 
 import UIKit
 
-class XWRefreshAutoFooter: XWRefreshFooter {
+
+/** footerView 什么样式都没有的 */
+public class XWRefreshAutoFooter: XWRefreshFooter {
     
     //MARK: 公共接口
     /** 是否自动刷新(默认为YES) */
-    var automaticallyRefresh:Bool = true
+    public var automaticallyRefresh:Bool = true
     
     /** 当底部控件出现多少时就自动刷新(默认为1.0，也就是底部控件完全出现时，才会自动刷新) */
 //    @available(*, deprecated=1.0, message="Use -automaticallyChangeAlpha instead.")
@@ -23,13 +26,13 @@ class XWRefreshAutoFooter: XWRefreshFooter {
     }
     
     /** 当底部控件出现多少时就自动刷新(默认为1.0，也就是底部控件完全出现时，才会自动刷新) */
-    var triggerAutomaticallyRefreshPercent:CGFloat = 1.0
+    public var triggerAutomaticallyRefreshPercent:CGFloat = 1.0
     
     
     //MARK: 重写
     
     //初始化
-    override func willMoveToSuperview(newSuperview: UIView?) {
+    override public func willMoveToSuperview(newSuperview: UIView?) {
         
         super.willMoveToSuperview(newSuperview)
         
@@ -120,7 +123,7 @@ class XWRefreshAutoFooter: XWRefreshFooter {
     }
     
     
-    override var hidden:Bool{
+    override public var hidden:Bool{
         didSet{
             //如果之前没有隐藏的现在隐藏了，那么要设置状态和去掉底部区域
             if !oldValue && hidden {

@@ -4,14 +4,15 @@
 //
 //  Created by Xiong Wei on 15/9/8.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
+
 
 import UIKit
 
 
 //文字颜色
 let XWRefreshLabelTextColor = xwColor(r: 100, g: 100, b: 100)
-
 //字体大小
 let XWRefreshLabelFont = UIFont.boldSystemFontOfSize(13)
 
@@ -52,5 +53,10 @@ let XWRefreshHeaderStateRefreshingText = "正在刷新数据中..."
 let XWRefreshFooterStateIdleText = "点击加载更多"
 let XWRefreshFooterStateRefreshingText = "正在加载更多的数据..."
 let XWRefreshFooterStateNoMoreDataText = "已经全部加载完毕"
+
+/** 图片路径 */
+let XWIconSrcPath:String = "Frameworks/XWSwiftRefresh.framework/xw_icon.bundle/xw_down.png"
+
+let XWIconLocalPath:String = "xw_icon.bundle/xw_down.png"
 
 

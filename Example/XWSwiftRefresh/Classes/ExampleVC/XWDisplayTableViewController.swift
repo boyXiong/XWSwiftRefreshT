@@ -4,7 +4,8 @@
 //
 //  Created by Xiong Wei on 15/10/7.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
 
 import UIKit
 
@@ -93,10 +94,11 @@ class XWDisplayTableViewController: UITableViewController {
         headerView.setImages(refreshingImages, duration: 0.8, state: XWRefreshState.Refreshing)
         
         
+        
         //隐藏状态栏
-        headerView.stateLabel.hidden = true
+        headerView.refreshingTitleHidden = true
         //隐藏时间状态
-        headerView.lastUpdatedTimeLabel.hidden = true
+        headerView.refreshingTimeHidden = true
         //根据上拉比例设置透明度
         headerView.automaticallyChangeAlpha = true
         

@@ -4,13 +4,14 @@
 //
 //  Created by Xiong Wei on 15/9/8.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
 
 import UIKit
 
 
 /** 刷新状态 */
-enum XWRefreshState:Int{
+public enum XWRefreshState:Int{
     /**普通闲置状态 */
     case Idle = 1
     /** 松开可以进行刷新状态 */
@@ -23,19 +24,20 @@ enum XWRefreshState:Int{
     case NoMoreData = 5
 }
 
-typealias XWRefreshComponentRefreshingClosure = ()->()
+/** 闭包的类型 ()->() */
+public typealias XWRefreshComponentRefreshingClosure = ()->()
 
-
- class XWRefreshComponent: UIView {
+/** 抽象类，不直接使用，用于继承后，重写*/
+public class XWRefreshComponent: UIView {
 
     //MARK: 公共接口
     //MARK 给外界访问的
     
     //1.字体颜色
-    var textColor:UIColor?
+    public var textColor:UIColor?
     
     //2.字体大小
-    var font:UIFont?
+    public var font:UIFont?
     
     //3.刷新的target
     private weak var refreshingTarget:AnyObject!
@@ -46,8 +48,8 @@ typealias XWRefreshComponentRefreshingClosure = ()->()
     //5.真正刷新 回调
     var refreshingClosure:XWRefreshComponentRefreshingClosure = {}
     
-    /**6. 拉拽的百分比 */
-    var pullingPercent:CGFloat = 1 {
+    /** 拉拽的百分比 */
+    public var pullingPercent:CGFloat = 1 {
         didSet{
             
             if self.state == XWRefreshState.Refreshing { return }
@@ -57,8 +59,8 @@ typealias XWRefreshComponentRefreshingClosure = ()->()
         }
     }
     
-    /**7.根据拖拽比例自动切换透明度 */
-    var automaticallyChangeAlpha:Bool = false {
+    /** 根据拖拽比例自动切换透明度 */
+    public var automaticallyChangeAlpha:Bool = false {
         didSet{
             if self.state == XWRefreshState.Refreshing { return }
             if automaticallyChangeAlpha == true {
@@ -72,6 +74,13 @@ typealias XWRefreshComponentRefreshingClosure = ()->()
     /**8.刷新状态，交给子类重写 */
     var state = XWRefreshState.Idle
     
+    /** 是否在刷新 */
+    public var isRefreshing:Bool{
+        get {
+            return self.state == .Refreshing || self.state == .WillRefresh;
+        }
+    }
+    
        
     //MARK 方法
     //提供方便，有提示
@@ -81,14 +90,17 @@ typealias XWRefreshComponentRefreshingClosure = ()->()
     
     
     //MARK: 遍历构造方法
-    convenience
+    
+    /** 闭包回调 */
+    public convenience
     init(ComponentRefreshingClosure:XWRefreshComponentRefreshingClosure){
         self.init()
         self.refreshingClosure = ComponentRefreshingClosure
         
     }
     
-    convenience
+    /**target action 回调 [推荐]*/
+    public convenience
     init(target:AnyObject, action:Selector){
         self.init()
         self.setRefreshingTarget(target, action: action)
@@ -105,8 +117,8 @@ typealias XWRefreshComponentRefreshingClosure = ()->()
     //MARK 公共接口  提供给子类重写
     
     
-    /** 2. 进入刷新状态 */
-    func beginRefreshing(){
+    /** 开始刷新,进入刷新状态 */
+    public func beginRefreshing(){
         
         UIView.animateWithDuration(XWRefreshSlowAnimationDuration) { () -> Void in
             self.alpha = 1.0
@@ -124,14 +136,12 @@ typealias XWRefreshComponentRefreshingClosure = ()->()
         }
 
     }
-    /** 3. 结束刷新状态 */
-    func endRefreshing(){
+    /** 结束刷新 */
+    public func endRefreshing(){
         self.state = .Idle
     
     }
     
-    /** 4. 是否正在刷新 */
-    func isRefreshing(){}
 
     /**
      5. 初始化 
@@ -195,14 +205,14 @@ typealias XWRefreshComponentRefreshingClosure = ()->()
         
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     
     
     //重写父类方法 这个view 会添加到 ScrollView 上去
-    override func willMoveToSuperview(newSuperview: UIView?) {
+    override public func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         
         //1.旧的父控件 移除监听
@@ -263,7 +273,7 @@ typealias XWRefreshComponentRefreshingClosure = ()->()
     
     
     //MARK: drawRect
-    override func drawRect(rect: CGRect) {
+    override public func drawRect(rect: CGRect) {
         super.drawRect(rect)
         
         if self.state == XWRefreshState.WillRefresh {
@@ -273,13 +283,13 @@ typealias XWRefreshComponentRefreshingClosure = ()->()
     }
     
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         self.placeSubvies()
     }
     
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         //需要这种情况就直接返回
         if !self.userInteractionEnabled { return }

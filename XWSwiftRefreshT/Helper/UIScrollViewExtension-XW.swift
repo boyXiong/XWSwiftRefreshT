@@ -4,7 +4,8 @@
 //
 //  Created by Xiong Wei on 15/9/9.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
 
 import UIKit
 
@@ -16,14 +17,15 @@ private var XWRefreshReloadDataClosureKey:Void?
 
 
 typealias xwClosureParamCountType = (Int)->Void
-class xwReloadDataClosureInClass {
+
+public class xwReloadDataClosureInClass {
     var reloadDataClosure:xwClosureParamCountType = { (Int)->Void in }
 }
 //用于加强一个引用
 //var xwRetainClosureClass = xwReloadDataClosureInClass()
 
 
-extension UIScrollView {
+public extension UIScrollView {
     
     
     /** ===========================================================================================

@@ -4,7 +4,8 @@
 //
 //  Created by Xiong Wei on 15/10/1.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
 
 import UIKit
 import Foundation
@@ -25,10 +26,10 @@ func xwColor(r r:Float, g:Float, b:Float) -> UIColor {
 }
 
 
-typealias xwTask = (cancel:Bool) -> ()
+public typealias xwTask = (cancel:Bool) -> ()
 
-/** 延迟执行 */
-func xwDelay(time: NSTimeInterval, task:dispatch_block_t) -> xwTask? {
+/** 延迟几秒后 在主线程中 执行闭包 ,返回xwTask 用于拿到后取消 */
+public func xwDelay(time: NSTimeInterval, task:dispatch_block_t) -> xwTask? {
     
     func dispatch_later(closure:dispatch_block_t){
         
@@ -67,8 +68,8 @@ func xwDelay(time: NSTimeInterval, task:dispatch_block_t) -> xwTask? {
     return result
 }
 
-/** 取消 */
-func xwCancel(task:xwTask?){
+/** 取消 任务 */
+public func xwCancel(task:xwTask?){
     
     task?(cancel:true)
 }

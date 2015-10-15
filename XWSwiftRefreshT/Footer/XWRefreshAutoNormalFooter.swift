@@ -4,15 +4,17 @@
 //
 //  Created by Xiong Wei on 15/10/6.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
 
 import UIKit
 
-class XWRefreshAutoNormalFooter: XWRefreshAutoStateFooter {
+/** footerView 带有菊花和状态文字的 */
+public class XWRefreshAutoNormalFooter: XWRefreshAutoStateFooter {
     
     //MARK: 外部访问
     /** 菊花样式 */
-    var activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray {
+    public var activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray {
         
         didSet{
             self.activityView.activityIndicatorViewStyle = activityIndicatorViewStyle
@@ -24,7 +26,7 @@ class XWRefreshAutoNormalFooter: XWRefreshAutoStateFooter {
     //MARK: 私有
     
     //菊花
-    private lazy var activityView:UIActivityIndicatorView = {
+    lazy var activityView:UIActivityIndicatorView = {
         
         [unowned self] in
         

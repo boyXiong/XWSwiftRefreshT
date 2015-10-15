@@ -4,11 +4,13 @@
 //
 //  Created by Xiong Wei on 15/10/6.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
 
 import UIKit
 
-class XWRefreshAutoStateFooter: XWRefreshAutoFooter {
+/** footerView 只有状态文字 */
+public class XWRefreshAutoStateFooter: XWRefreshAutoFooter {
     
     //MARK: 外部
 
@@ -21,9 +23,10 @@ class XWRefreshAutoStateFooter: XWRefreshAutoFooter {
     }()
     
     /** 隐藏刷新状态的文字 */
-    var refreshingTitleHidden:Bool = false
+    public var refreshingTitleHidden:Bool = false
     
-    func setTitle(title:String, state:XWRefreshState){
+    /** 设置状态的显示文字 */
+    public func setTitle(title:String, state:XWRefreshState){
         self.stateLabel.text = self.stateTitles[self.state];
     }
 

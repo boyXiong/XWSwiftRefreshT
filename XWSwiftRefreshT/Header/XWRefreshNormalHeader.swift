@@ -4,15 +4,18 @@
 //
 //  Created by Xiong Wei on 15/10/5.
 //  Copyright © 2015年 Xiong Wei. All rights reserved.
-//
+//  新浪微博: @爱吃香干炒肉
+
 
 import UIKit
 
-
-class XWRefreshNormalHeader: XWRefreshStateHeader {
+/** headerView 带有状态和指示图片*/
+public class XWRefreshNormalHeader: XWRefreshStateHeader {
     
     //MARK: 外界接口
-    var activityIndicatorViewStyle:UIActivityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray {
+    
+    /** 菊花样式 */
+    public var activityIndicatorViewStyle:UIActivityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray {
         
         didSet{
             self.activityView.activityIndicatorViewStyle = activityIndicatorViewStyle
@@ -20,20 +23,33 @@ class XWRefreshNormalHeader: XWRefreshStateHeader {
         }
     }
     
+    /** 指示器的图片[箭头] */
+    public var arrowImage:UIImage? {
+        didSet{
+            
+            self.arrowView.image = arrowImage
+            self.placeSubvies()
+        }
+    }
     
     
     //MARK: lazy
     //图片
-    private lazy  var arrowView:UIImageView = {
+    /** 指示图片 */
+    lazy  var arrowView:UIImageView = {
         [unowned self] in
-        var path:NSString = "xw_icon.bundle"
-        path = path.stringByAppendingPathComponent("xw_down.png")
-        let imageView = UIImageView(image: UIImage(named: String(path)))
-        
+
+        var image = UIImage(named:XWIconSrcPath)
+        if image == nil {
+            image = UIImage(named: XWIconLocalPath)
+        }
+        let imageView = UIImageView(image: image)
         self.addSubview(imageView)
         
         return imageView
         }()
+    
+    
     
     //菊花
     private lazy var activityView:UIActivityIndicatorView = {
